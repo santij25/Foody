@@ -65,7 +65,7 @@ const getDietsHandler = async (req, res, next) => {
     );
     const dietas = data.results.map((e) => e.diets).flat();
 
-    const dietasUnicas = [];
+    const dietasUnicas = ["Vegetarian"];
     for (var i = 0; i < dietas.length; i++) {
       if (!dietasUnicas.includes(dietas[i])) {
         dietasUnicas.push(dietas[i]);

@@ -1,4 +1,4 @@
-const { Recipe } = require("../db");
+const { Recipe, Diets } = require("../db");
 const axios = require("axios");
 const { API_KEY } = process.env;
 
@@ -50,4 +50,50 @@ const getRecipeById = async (id, where) => {
   }
 };
 
-module.exports = { createRecipe, getRecipeById };
+const getRecipesApi = async () => {
+  const apiRecipes = await axios(
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+  );
+  const result = apiRecipes.data.results.map((e) => {
+    return {
+      id: e.id,
+      name: e.title,
+      imagen: e.image,
+      resumenDelPlato: e.summary,
+      healthScore: e.healthScore,
+      diets: e.diets,
+      pasoAPaso:
+        e.analyzedInstructions[0] &&
+        e.analyzedInstructions[0].steps.map((s) => {
+          return {
+            number: s.number,
+            step: s.step,
+          };
+        }),
+    };
+  });
+  return result;
+};
+
+const getDbRecipes = async () => {
+  const result = await Recipe.findAll({
+    include: [
+      {
+        model: Diets,
+        attributes: {
+          exclude: ["Recipe-Diets", "ID"],
+        },
+      },
+    ],
+  });
+  return result;
+};
+
+const getAllRecipes = async () => {
+  const apiRecipes = await getRecipesApi();
+  const dbRecipes = await getDbRecipes();
+  const allRecipes = apiRecipes.concat(dbRecipes);
+  return allRecipes;
+};
+
+module.exports = { createRecipe, getRecipeById, getAllRecipes, getDbRecipes };

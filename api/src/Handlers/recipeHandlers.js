@@ -1,4 +1,8 @@
-const { createRecipe, getRecipeById } = require("../controllers/recipeControllers");
+const {
+  createRecipe,
+  getRecipeById,
+  getAllRecipes,
+} = require("../controllers/recipeControllers");
 const { Diets } = require("../db");
 // const axios = require("axios");
 // const { API_KEY } = process.env;
@@ -8,14 +12,26 @@ const getRecipeHandler = async (req, res) => {
   const where = isNaN(id) ? "bdd" : "api";
   try {
     const recipe = await getRecipeById(id, where);
-    res.status(201).json(recipe)
+    res.status(201).json(recipe);
   } catch (error) {
     res.status(400).json("Receta no encontrada");
   }
 };
 
-const getRecipeNameHandler = (req, res) => {
-  res.status(200).send("En getRecipeNameHandler");
+const getRecipeNameHandler = async (req, res) => {
+  const { name } = req.query;
+  const allRecipes = await getAllRecipes();
+  try {
+    if (name) {
+      const result = allRecipes.filter((el) =>
+        el.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (result.length) return res.status(200).json(result);
+      return res.status(400).json(`Receta ${name} no encontrada`);
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 const cerateRecipeHandler = async (req, res) => {
