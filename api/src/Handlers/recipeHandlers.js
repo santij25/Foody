@@ -28,6 +28,8 @@ const getRecipeNameHandler = async (req, res) => {
       );
       if (result.length) return res.status(200).json(result);
       return res.status(400).json(`Receta ${name} no encontrada`);
+    } else {
+      res.status(200).json(allRecipes);
     }
   } catch (error) {
     res.status(400).json({ error: error.message });

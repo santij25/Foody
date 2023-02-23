@@ -13,10 +13,10 @@ const CardsContainer = () => {
             id={recipe.id}
             name={recipe.name}
             imagen={recipe.imagen}
-            resumenDelPlato={recipe.resumenDelPlato}
+            // resumenDelPlato={recipe.resumenDelPlato}
             healthScore={recipe.healthScore}
             diets={recipe.diets}
-            pasoAPaso={recipe.pasoAPaso}
+            // pasoAPaso={recipe.pasoAPaso}
           />
         );
       })}
