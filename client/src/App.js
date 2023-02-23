@@ -1,9 +1,18 @@
-import './App.css';
+import { Landing, Home, Detail, Form } from "./views/index"
+import { Route, useLocation } from "react-router-dom";
+import NavBar from "./Components/NavBar/NavBar"
+
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+      {location.pathname!=="/" && <NavBar />}
+      <Route exact path="/" render={() => <Landing />} />
+      <Route path="/Home" render={() => <Home />} />
+      <Route exact path="/Detail" render={() => <Detail />} />
+      <Route exact path="/Create" render={() => <Form />} />
     </div>
   );
 }
