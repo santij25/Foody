@@ -11,7 +11,7 @@ function App() {
       {location.pathname!=="/" && <NavBar />}
       <Route exact path="/" render={() => <Landing />} />
       <Route path="/Home" render={() => <Home />} />
-      <Route exact path="/Detail" render={() => <Detail />} />
+      <Route exact path="/Detail/:id" render={() => <Detail />} />
       <Route exact path="/Create" render={() => <Form />} />
     </div>
   );
