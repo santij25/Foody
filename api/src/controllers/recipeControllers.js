@@ -77,14 +77,13 @@ const getRecipesApi = async () => {
 
 const getDbRecipes = async () => {
   const result = await Recipe.findAll({
-    include: [
-      {
-        model: Diets,
-        attributes: {
-          exclude: ["Recipe-Diets", "ID"],
-        },
-      },
-    ],
+    include: [{
+      model: Diets,
+      attributes: ['Nombre'],
+      through: {
+        attributes: []
+      }        
+    }]
   });
   return result;
 };
@@ -97,3 +96,4 @@ const getAllRecipes = async () => {
 };
 
 module.exports = { createRecipe, getRecipeById, getAllRecipes, getDbRecipes };
+

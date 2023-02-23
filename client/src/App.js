@@ -1,18 +1,29 @@
-import { Landing, Home, Detail, Form } from "./views/index"
+import { Landing, Home, Detail, Form } from "./views/index";
 import { Route, useLocation } from "react-router-dom";
-import NavBar from "./Components/NavBar/NavBar"
-
+import NavBar from "./Components/NavBar/NavBar";
+import Loading from "./Components/Loading/Loading";
+import { Suspense } from "react";
 
 function App() {
   const location = useLocation();
 
   return (
     <div className="App">
-      {location.pathname!=="/" && <NavBar />}
+      {location.pathname !== "/" && location.pathname !== "/Loading" && (
+        <NavBar />
+      )}
+
       <Route exact path="/" render={() => <Landing />} />
-      <Route path="/Home" render={() => <Home />} />
-      <Route exact path="/Detail/:id" render={() => <Detail />} />
-      <Route exact path="/Create" render={() => <Form />} />
+      <Suspense fallback={<Loading />}>
+        <Route path="/Home" render={() => <Home />} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Route exact path="/Detail/:id" render={() => <Detail />} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Route exact path="/Create" render={() => <Form />} />
+      </Suspense>
+      <Route exact path="/Loading" render={() => <Loading />} />
     </div>
   );
 }

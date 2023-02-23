@@ -1,0 +1,12 @@
+.back {
+  background-image: url(../../Media/360_F_378975954_G39M4ptXAjxKy80gbBIEo0wqBkk89gBF.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+}

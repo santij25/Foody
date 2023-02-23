@@ -24,7 +24,7 @@ const Detail = () => {
           ? recipe.pasoAPaso.map((r) => {
               return <li>{r.number + " " + r.step}</li>
             })
-          : null}
+          : <p>No hay pasos 😔</p>}
       </ul>
     </div>
   );
