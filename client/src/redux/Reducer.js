@@ -1,9 +1,13 @@
+import { GET_RECIPES } from "./Actions";
+
 const initialState = {
-  users: [],
+  recipes: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_RECIPES:
+      return { ...state, recipes: action.payload };
     default:
       return { ...state };
   }
