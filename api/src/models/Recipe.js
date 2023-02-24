@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       pasoAPaso: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
+        type: DataTypes.ARRAY(DataTypes.STRING(5000)),
         allowNull: false,
       },
       created: {

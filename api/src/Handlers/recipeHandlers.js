@@ -41,14 +41,15 @@ const cerateRecipeHandler = async (req, res) => {
     req.body;
 
   try {
-    if (!name || !imagen || !resumenDelPlato || !healthScore || !pasoAPaso)
+    if (!name || !imagen || !resumenDelPlato || !healthScore || !diets)
       throw Error("Faltan datos");
     const newRecipe = await createRecipe(
       name,
       imagen,
       resumenDelPlato,
       healthScore,
-      pasoAPaso
+      pasoAPaso,
+      diets
     );
     const typeDiet = await Diets.findAll({
       where: { Nombre: diets },

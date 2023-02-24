@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getDiets } from "../../redux/Actions";
 import { useHistory } from "react-router-dom";
-// import { postRecipe } from "../../redux/Actions";
+import { postRecipe } from "../../redux/Actions";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -50,15 +50,23 @@ const Form = () => {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    // dispatch(postRecipe(form))
-    //   .then((e) => {
-    alert("Receta creada");
-    history.goBack();
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   alert("Ocurrio un error");
-    // });
+    dispatch(postRecipe(form))
+      .then((e) => {
+        setForm({
+          name: "",
+          imagen: "",
+          resumenDelPlato: "",
+          healthScore: 0,
+          pasoAPaso: [],
+          diets: [],
+        });
+        alert("Receta creada");
+        history.goBack();
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Ocurrio un error");
+      });
   };
 
   return (

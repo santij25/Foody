@@ -8,10 +8,10 @@ const Card = (props) => {
       <Link to={`/Detail/${props.id}`}>
         <p>name: {props.name}</p>
       </Link>
-      <img src={props.imagen} alt="plato"/>
+      <img src={props.imagen} alt="plato" width={"250px"} height={"200px"}/>
       {/* <p>resumenDelPlato:{props.resumenDelPlato}</p> */}
       <p> healthScore:{props.healthScore}</p>
-      <p> diets:{props.diets}</p>
+      {props.diets.map(d => <p>{d}</p>)}
       {/* <p> pasoAPaso:{props.pasoAPaso}</p> */}
     </div>
   );

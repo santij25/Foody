@@ -4,6 +4,7 @@ import style from "./CardsContainer.module.css";
 
 const CardsContainer = () => {
   const recipes = useSelector((state) => state.recipes);
+  console.log(recipes);
   return (
     <div className={style.container}>
       {recipes.map((recipe) => {

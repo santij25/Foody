@@ -31,9 +31,7 @@ export const getDiets = () => {
 
 export const postRecipe = (props) => {
   return async function (dispatch) {
-    const postRecipe = await axios.post("http://localhost:3001/recipes", {
-      props,
-    });
+    const postRecipe = await axios.post("http://localhost:3001/recipes", props);
     dispatch({ type: POST_RECIPE, payload: postRecipe });
   };
 };
