@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getDiets } from "../../redux/Actions";
 
 const Form = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDiets());
+  }, [dispatch]);
+
   const dietasApi = useSelector((state) => state.diets);
-  console.log(dietasApi);
   const [form, setForm] = useState({
     nombre: "",
     summary: "",
@@ -13,23 +20,24 @@ const Form = () => {
     diets: [],
   });
 
+  console.log(form);
+
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
     setForm({ ...form, [property]: value });
   };
 
-  const check = (event) => {
-    let dietas = form.diets;
-    if (event.target.checked) {
-      let aux = dietas.includes(event.target.value);
-      if (!aux) {
-        dietas.push(event.target.value);
-      }
+  const handleSelect = (e) => {
+    if (!form.diets.includes(e.target.value)) {
+      setForm({ ...form, diets: [...form.diets, e.target.value] });
     } else {
-      dietas = dietas.filter((check) => check !== event.target.value);
+      alert("Ya agregado");
     }
-    setForm({ ...form, diets: dietas });
+  };
+
+  const handleDelete = (diet) => {
+    setForm({ ...form, diets: [...form.diets.filter((e) => e !== diet)] });
   };
 
   return (
@@ -81,24 +89,44 @@ const Form = () => {
             placeholder="Link de la imagen..."
           />
         </div>
-        <div>
-          <label>Dietas: </label>
-          {dietasApi &&
-            dietasApi.map((d) => (
-              <div key={d.id}>
-                <label>
-                  <input
-                    key={d.id}
-                    name={d.Nombre}
-                    onChange={(e) => check(e)}
-                    type="checkbox"
-                    value={d.id}
-                  />
-                  {d.Nombre}
-                </label>
-              </div>
-            ))}
+
+        <label className="info">Diets: </label>
+        <select name="diets" className="diets" onChange={handleSelect}>
+          {!dietasApi.length ? (
+            <option>Cargando...</option>
+          ) : (
+            dietasApi.map((e) => {
+              return (
+                <option key={e.id} value={e.id}>
+                  {e.Nombre}
+                </option>
+              );
+            })
+          )}
+        </select>
+        <br />
+        <div className="DietasAgregadas">
+          <label>Dietas Agregadas: </label>
+          {!form.diets
+            ? null
+            : form.diets.map((diet) => (
+                <div key={diet}>
+                  <div className="dietAdd">
+                    <p>{diet}</p>
+                    <button
+                      onClick={(a) => {
+                        a.preventDefault();
+                        handleDelete(diet);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                  <hr className="div" />
+                </div>
+              ))}
         </div>
+
         <button type="submit">CREAR</button>
       </form>
     </div>
