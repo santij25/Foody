@@ -72,7 +72,7 @@ const getDietsHandler = async (req, res, next) => {
       }
     }
     for (let name of dietasUnicas) {
-      await Diets.create({ Nombre: name });
+      await Diets.findOrCreate({ where: { Nombre: name } });
     }
     const result = await Diets.findAll();
     res.status(201).json(result);
