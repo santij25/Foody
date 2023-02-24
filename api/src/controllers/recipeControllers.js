@@ -37,6 +37,7 @@ const getRecipeById = async (id, where) => {
             step: s.step,
           };
         }),
+      created: false,
     };
     return resuApi;
   } else {
@@ -77,15 +78,29 @@ const getRecipesApi = async () => {
 
 const getDbRecipes = async () => {
   const result = await Recipe.findAll({
-    include: [{
-      model: Diets,
-      attributes: ['Nombre'],
-      through: {
-        attributes: []
-      }        
-    }]
+    include: [
+      {
+        model: Diets,
+        attributes: ["Nombre"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
   });
-  return result;
+
+  const recipeDb = await result.map((data) => {
+    return {
+      id: data.id,
+      name: data.name,
+      imagen: data.imagen,
+      resumenDelPlato: data.resumenDelPlato,
+      healthScore: data.healthScore,
+      pasoAPaso: data.pasoAPaso,
+      diets: data.diets.map((diet) => diet.Nombre),
+    };
+  });
+  return recipeDb;
 };
 
 const getAllRecipes = async () => {
@@ -96,4 +111,3 @@ const getAllRecipes = async () => {
 };
 
 module.exports = { createRecipe, getRecipeById, getAllRecipes, getDbRecipes };
-

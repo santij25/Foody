@@ -3,24 +3,32 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getDiets } from "../../redux/Actions";
+import { useHistory } from "react-router-dom";
+// import { postRecipe } from "../../redux/Actions";
 
 const Form = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     dispatch(getDiets());
   }, [dispatch]);
 
   const dietasApi = useSelector((state) => state.diets);
   const [form, setForm] = useState({
-    nombre: "",
-    summary: "",
+    name: "",
+    imagen: "",
+    resumenDelPlato: "",
     healthScore: 0,
-    steps: [],
-    image: "",
+    pasoAPaso: [],
     diets: [],
   });
 
   console.log(form);
+
+  const stepHandler = (e) => {
+    const steps = [e.target.value];
+    setForm({ ...form, pasoAPaso: steps });
+  };
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -28,7 +36,7 @@ const Form = () => {
     setForm({ ...form, [property]: value });
   };
 
-  const handleSelect = (e) => {
+  const selectHandler = (e) => {
     if (!form.diets.includes(e.target.value)) {
       setForm({ ...form, diets: [...form.diets, e.target.value] });
     } else {
@@ -36,8 +44,21 @@ const Form = () => {
     }
   };
 
-  const handleDelete = (diet) => {
+  const deleteHandler = (diet) => {
     setForm({ ...form, diets: [...form.diets.filter((e) => e !== diet)] });
+  };
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    // dispatch(postRecipe(form))
+    //   .then((e) => {
+    alert("Receta creada");
+    history.goBack();
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   alert("Ocurrio un error");
+    // });
   };
 
   return (
@@ -47,7 +68,7 @@ const Form = () => {
           <label>Nombre: </label>
           <input
             type="text"
-            name="nombre"
+            name="name"
             onChange={changeHandler}
             placeholder="Nombre..."
           />
@@ -56,7 +77,7 @@ const Form = () => {
           <label>Resumen del plato: </label>
           <input
             type="text"
-            name="summary"
+            name="resumenDelPlato"
             onChange={changeHandler}
             placeholder="Resumen del plato..."
           />
@@ -73,10 +94,10 @@ const Form = () => {
         <div>
           <label>Pasos: </label>
           <textarea
-            name="steps"
+            name="pasoAPaso"
             cols="30"
             rows="6"
-            onChange={changeHandler}
+            onChange={stepHandler}
             placeholder="Pasos a seguir..."
           />
         </div>
@@ -84,14 +105,14 @@ const Form = () => {
           <label>Imagen: </label>
           <input
             type="text"
-            name="image"
+            name="imagen"
             onChange={changeHandler}
             placeholder="Link de la imagen..."
           />
         </div>
 
         <label className="info">Diets: </label>
-        <select name="diets" className="diets" onChange={handleSelect}>
+        <select name="diets" className="diets" onChange={selectHandler}>
           {!dietasApi.length ? (
             <option>Cargando...</option>
           ) : (
@@ -116,7 +137,7 @@ const Form = () => {
                     <button
                       onClick={(a) => {
                         a.preventDefault();
-                        handleDelete(diet);
+                        deleteHandler(diet);
                       }}
                     >
                       X
@@ -127,7 +148,9 @@ const Form = () => {
               ))}
         </div>
 
-        <button type="submit">CREAR</button>
+        <button type="submit" onClick={SubmitHandler}>
+          CREAR RECETA
+        </button>
       </form>
     </div>
   );

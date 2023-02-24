@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_RECIPES = "GET_RECIPES";
 export const GET_RECIPE = "GET_RECIPE";
 export const GET_DIETS = "GET_DIETS";
+export const POST_RECIPE = "POST_RECIPE";
 
 export const getRecipes = () => {
   return async function (dispatch) {
@@ -25,5 +26,14 @@ export const getDiets = () => {
     const apiDiets = await axios("http://localhost:3001/diets");
     const diets = apiDiets.data;
     dispatch({ type: GET_DIETS, payload: diets });
+  };
+};
+
+export const postRecipe = (props) => {
+  return async function (dispatch) {
+    const postRecipe = await axios.post("http://localhost:3001/recipes", {
+      props,
+    });
+    dispatch({ type: POST_RECIPE, payload: postRecipe });
   };
 };
