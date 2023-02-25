@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getDiets } from "../../redux/Actions";
 import { useHistory } from "react-router-dom";
 import { postRecipe } from "../../redux/Actions";
+import { Validations } from "./Validaciones";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -23,57 +24,17 @@ const Form = () => {
     diets: [],
   });
 
-  const [errors, setErrors] = useState({
-    name: "",
-    imagen: "",
-    resumenDelPlato: "",
-    healthScore: "",
-    pasoAPaso: "",
-    diets: "",
-  });
-
-  const validate = (form) => {
-    !/[a-zA-Z ]{2,254}/.test(form.name)
-      ? setErrors({ ...errors, name: "Solo letras y mínimo 2 carácteres" })
-      : setErrors({ ...errors, name: "" });
-
-    !/[a-zA-Z0-9]{2,254}/.test(form.resumenDelPlato)
-      ? setErrors({ ...errors, resumenDelPlato: "Solo letras y números" })
-      : setErrors({ ...errors, resumenDelPlato: "" });
-
-    //   if (/^(1[7-9][0-9][0-9]|20[0-9][0-9]|100)$/.test(form.healthScore)) {
-    //   setErrors({ ...errors, healthScore: "" });
-    // } else {
-    //   setErrors({ ...errors, healthScore: "Números entre 1-100" });
-    // }
-    // if (form.healthScore === 0) setErrors({ ...errors, healthScore: "" });
-
-    // if (
-    //   /(http(s?):)?([/|.|\w|\s|-])*\.(?:jpg|gif|png)\??([%&a-z0-9=_-]+)?/.test(
-    //     form.imagen
-    //   )
-    // ) {
-    //   setErrors({ ...errors, imagen: "" });
-    // } else {
-    //   setErrors({ ...errors, imagen: "La imagen esta mal" });
-    // }
-    // if (form.imagen === 0) setErrors({ ...errors, imagen: "" });
-
-    // if (form.diets[0]) {
-    //   setErrors({ ...errors, diets: "" });
-    // } else {
-    //   setErrors({ ...errors, diets: "Agregue al menos una dieta" });
-    // }
-    // if (form.diets === [])
-    //   setErrors({ ...errors, diets: "Agregue al menos una dieta" });
-  };
-
+  const [errors, setErrors] = useState({});
   console.log(errors);
-
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    validate({ ...form, [property]: value });
+    setErrors(
+      Validations({
+        ...form,
+        [property]: value,
+      })
+    );
     setForm({ ...form, [property]: value });
   };
 
@@ -208,7 +169,6 @@ const Form = () => {
                   <hr className="div" />
                 </div>
               ))}
-          {errors.diets && <span>{errors.diets}</span>}
         </div>
 
         <button type="submit" onClick={SubmitHandler}>
