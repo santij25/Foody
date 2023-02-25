@@ -71,6 +71,7 @@ const getRecipesApi = async () => {
             step: s.step,
           };
         }),
+      created: false,
     };
   });
   return result;
