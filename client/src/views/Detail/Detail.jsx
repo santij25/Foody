@@ -20,9 +20,11 @@ const Detail = () => {
       <h6>diets:{recipe.diets}</h6>
       <ul>
         steps:
-        {recipe.pasoAPaso
-          ? recipe.pasoAPaso.map((r) => {
+        {(recipe.pasoAPaso)
+          ? (typeof recipe.pasoAPaso[0] === "object") ? recipe.pasoAPaso.map((r) => {
               return <li>{r.number + " " + r.step}</li>
+            }) : recipe.pasoAPaso.map(r => {
+              return <li>{r}</li>
             })
           : <p>No hay pasos 😔</p>}
       </ul>

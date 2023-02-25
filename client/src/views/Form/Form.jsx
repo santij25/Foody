@@ -23,16 +23,57 @@ const Form = () => {
     diets: [],
   });
 
-  console.log(form);
+  const [errors, setErrors] = useState({
+    name: "",
+    imagen: "",
+    resumenDelPlato: "",
+    healthScore: "",
+    pasoAPaso: "",
+    diets: "",
+  });
 
-  const stepHandler = (e) => {
-    const steps = [e.target.value];
-    setForm({ ...form, pasoAPaso: steps });
+  const validate = (form) => {
+    !/[a-zA-Z ]{2,254}/.test(form.name)
+      ? setErrors({ ...errors, name: "Solo letras y mínimo 2 carácteres" })
+      : setErrors({ ...errors, name: "" });
+
+    !/[a-zA-Z0-9]{2,254}/.test(form.resumenDelPlato)
+      ? setErrors({ ...errors, resumenDelPlato: "Solo letras y números" })
+      : setErrors({ ...errors, resumenDelPlato: "" });
+
+    //   if (/^(1[7-9][0-9][0-9]|20[0-9][0-9]|100)$/.test(form.healthScore)) {
+    //   setErrors({ ...errors, healthScore: "" });
+    // } else {
+    //   setErrors({ ...errors, healthScore: "Números entre 1-100" });
+    // }
+    // if (form.healthScore === 0) setErrors({ ...errors, healthScore: "" });
+
+    // if (
+    //   /(http(s?):)?([/|.|\w|\s|-])*\.(?:jpg|gif|png)\??([%&a-z0-9=_-]+)?/.test(
+    //     form.imagen
+    //   )
+    // ) {
+    //   setErrors({ ...errors, imagen: "" });
+    // } else {
+    //   setErrors({ ...errors, imagen: "La imagen esta mal" });
+    // }
+    // if (form.imagen === 0) setErrors({ ...errors, imagen: "" });
+
+    // if (form.diets[0]) {
+    //   setErrors({ ...errors, diets: "" });
+    // } else {
+    //   setErrors({ ...errors, diets: "Agregue al menos una dieta" });
+    // }
+    // if (form.diets === [])
+    //   setErrors({ ...errors, diets: "Agregue al menos una dieta" });
   };
+
+  console.log(errors);
 
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
+    validate({ ...form, [property]: value });
     setForm({ ...form, [property]: value });
   };
 
@@ -46,6 +87,12 @@ const Form = () => {
 
   const deleteHandler = (diet) => {
     setForm({ ...form, diets: [...form.diets.filter((e) => e !== diet)] });
+  };
+
+  const pasosHandler = (e) => {
+    const value = e.target.value;
+    const valueSep = value.split("\n");
+    setForm({ ...form, pasoAPaso: valueSep });
   };
 
   const SubmitHandler = (e) => {
@@ -80,6 +127,7 @@ const Form = () => {
             onChange={changeHandler}
             placeholder="Nombre..."
           />
+          {errors.name && <span>{errors.name}</span>}
         </div>
         <div>
           <label>Resumen del plato: </label>
@@ -89,6 +137,7 @@ const Form = () => {
             onChange={changeHandler}
             placeholder="Resumen del plato..."
           />
+          {errors.resumenDelPlato && <span>{errors.resumenDelPlato}</span>}
         </div>
         <div>
           <label>Nivel de comida saludable: </label>
@@ -98,6 +147,7 @@ const Form = () => {
             onChange={changeHandler}
             placeholder="Nivel de saludable..."
           />
+          {errors.healthScore && <span>{errors.healthScore}</span>}
         </div>
         <div>
           <label>Pasos: </label>
@@ -105,8 +155,11 @@ const Form = () => {
             name="pasoAPaso"
             cols="30"
             rows="6"
-            onChange={stepHandler}
-            placeholder="Pasos a seguir..."
+            onChange={pasosHandler}
+            placeholder=" Ejemplo: 
+            1 hervir el agua 
+            2 sacar el agua 
+            (Respetar el formato)"
           />
         </div>
         <div>
@@ -117,6 +170,7 @@ const Form = () => {
             onChange={changeHandler}
             placeholder="Link de la imagen..."
           />
+          {errors.imagen && <span>{errors.imagen}</span>}
         </div>
 
         <label className="info">Diets: </label>
@@ -154,6 +208,7 @@ const Form = () => {
                   <hr className="div" />
                 </div>
               ))}
+          {errors.diets && <span>{errors.diets}</span>}
         </div>
 
         <button type="submit" onClick={SubmitHandler}>

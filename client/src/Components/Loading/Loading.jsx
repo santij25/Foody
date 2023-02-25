@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Loading.module.css";
-import logo from "../../Media/loader_dribble.gif"
+import logo from "../../Media/loading.gif"
 
 const Loading = () => {
   return (
