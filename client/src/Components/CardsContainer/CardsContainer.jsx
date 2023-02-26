@@ -1,63 +1,79 @@
-import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
-import { useState } from "react";
 
-const CardsContainer = () => {
-  const [search, setSearch] = useState("");
-
-  const changeHandler = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const recipes = useSelector((state) => state.recipes);
+const CardsContainer = ({ recipes }) => {
   return (
     <div className={style.container}>
-      <div>
-        <input
-          type="search"
-          placeholder="Buscar"
-          onChange={changeHandler}
-          value={search}
-        />
-      </div>
-      <div>
-        {!search
-          ? recipes.map((recipe) => {
-              return (
-                <Card
-                  key={recipe.id}
-                  id={recipe.id}
-                  name={recipe.name}
-                  imagen={recipe.imagen}
-                  // resumenDelPlato={recipe.resumenDelPlato}
-                  healthScore={recipe.healthScore}
-                  diets={recipe.diets}
-                  // pasoAPaso={recipe.pasoAPaso}
-                />
-              );
-            })
-          : recipes
-              .filter((el) =>
-                el.name.toLowerCase().includes(search.toLowerCase())
-              )
-              .map((recipe) => {
-                return (
-                  <Card
-                    key={recipe.id}
-                    id={recipe.id}
-                    name={recipe.name}
-                    imagen={recipe.imagen}
-                    // resumenDelPlato={recipe.resumenDelPlato}
-                    healthScore={recipe.healthScore}
-                    diets={recipe.diets}
-                    // pasoAPaso={recipe.pasoAPaso}
-                  />
-                );
-              })}
-      </div>
+      {!recipes.length ? (
+        <h1>No hay recetas 😔</h1>
+      ) : recipes[0] === "Not Found" ? (
+        <h1>No hay recetas 😔</h1>
+      ) : (
+        recipes.map((recipe) => {
+          return (
+            <Card
+              key={recipe.id}
+              id={recipe.id}
+              name={recipe.name}
+              imagen={recipe.imagen}
+              // resumenDelPlato={recipe.resumenDelPlato}
+              healthScore={recipe.healthScore}
+              diets={recipe.diets}
+              // pasoAPaso={recipe.pasoAPaso}
+            />
+          );
+        })
+      )}
     </div>
   );
 };
 
 export default CardsContainer;
+
+// {
+//   !recipes.length ? (
+//     <div>
+//       <h1>No hay recetas 😔</h1>
+//     </div>
+//   ) : recipes[0] === "Not Found" ? (
+//     <h1>No hay recetas 😔</h1>
+//   ) : (
+//     recipes.map((recipe) => {
+//       return (
+// <Card
+//   key={recipe.id}
+//   id={recipe.id}
+//   name={recipe.name}
+//   imagen={recipe.imagen}
+//   // resumenDelPlato={recipe.resumenDelPlato}
+//   healthScore={recipe.healthScore}
+//   diets={recipe.diets}
+//   // pasoAPaso={recipe.pasoAPaso}
+// />
+//       );
+//     })
+//   );
+// }
+
+// <div className={style.container}>
+//       {recipes ? (
+//         recipes.map((recipe) => {
+//           return (
+//             <Card
+//               key={recipe.id}
+//               id={recipe.id}
+//               name={recipe.name}
+//               imagen={recipe.imagen}
+//               // resumenDelPlato={recipe.resumenDelPlato}
+//               healthScore={recipe.healthScore}
+//               diets={recipe.diets}
+//               // pasoAPaso={recipe.pasoAPaso}
+//             />
+//           );
+//         })
+//       ) : recipes[0] === "Not Found" ? (
+//         <h1>No hay recetas 😔</h1>
+//       ) : (
+//         <h1>No hay recetas 😔</h1>
+//       )}
+//     </div>
