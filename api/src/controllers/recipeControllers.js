@@ -99,6 +99,7 @@ const getDbRecipes = async () => {
       healthScore: data.healthScore,
       pasoAPaso: data.pasoAPaso,
       diets: data.diets.map((diet) => diet.Nombre),
+      created: data.created,
     };
   });
   return recipeDb;

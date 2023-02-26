@@ -64,29 +64,17 @@ const Home = () => {
     <div>
       <div>
         <nav>
-          <div className="opcionesFilt">
-            <div className="Buscador">
-              <form>
-                <input
-                  type="text"
-                  name="Buscar"
-                  onChange={HandleChange}
-                  placeholder="Bucsar receta"
-                />
-              </form>
+          <div>
+            <form>
               <input
-                className="buscar"
-                type="submit"
-                value="🔎"
-                onClick={handleSubmit}
+                type="text"
+                name="Buscar"
+                onChange={HandleChange}
+                placeholder="Bucsar receta"
               />
-            </div>
-            <div className="FiltrosBasic">
-              <select
-                className="FiltroASDDES"
-                onChange={nameHandler}
-                defaultValue="default"
-              >
+              <input type="submit" value="🔎" onClick={handleSubmit} />
+
+              <select onChange={nameHandler} defaultValue="default">
                 <option value="default" disabled>
                   Ordenar por Nombre
                 </option>
@@ -115,13 +103,13 @@ const Home = () => {
                   );
                 })}
               </select>
-            </div>
 
-            <select name="DBAPI" onChange={dbApiHandler}>
-              <option value="ALL">All</option>
-              <option value="DB">DataBase</option>
-              <option value="API">API</option>
-            </select>
+              <select name="DBAPI" onChange={dbApiHandler}>
+                <option value="ALL">All</option>
+                <option value="DB">DataBase</option>
+                <option value="API">API</option>
+              </select>
+            </form>
           </div>
         </nav>
       </div>

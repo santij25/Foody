@@ -74,9 +74,9 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_DB_API:
       const recipe2 = state.recipes2;
       let dbApi = [];
-      if (action.payload === "DB") dbApi = recipe2.filter((e) => e.id.length > 30);
+      if (action.payload === "DB") dbApi = recipe2.filter((e) => e.created);
       else if (action.payload === "API")
-        dbApi = recipe2.filter((e) => e.id.length === 6);
+        dbApi = recipe2.filter((e) => !e.created);
       else dbApi = recipe2;
       if (!dbApi.length) dbApi.push("Not Found");
       return { ...state, recipes: dbApi };
