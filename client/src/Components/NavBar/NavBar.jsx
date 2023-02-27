@@ -1,19 +1,39 @@
 import { Link } from "react-router-dom";
 import style from "./NavBar.module.css";
-import logo from "../../Media/hambu.webp";
+import logo from "../../Media/fudi.png";
 
 const NavBar = () => {
   return (
-    <nav>
-      <div className={style.container}>
-        <Link to="/home">
-          <img src={logo} alt="hamburguesa" width={"50px"} height={"50px"} />
-        </Link>
-        <Link to="/home">Home</Link>
-        <Link to="/create">Create</Link>
-        <Link to="/">Landing</Link>
+    <div className={style.container}>
+      <div className={style.todo}>
+        <header className={style.header}>
+          <div className={style.logo}>
+            <Link to="/home">
+              <img src={logo} alt="hamburguesa" />
+            </Link>
+          </div>
+          <nav>
+            <ul className={style.navLinks}>
+              <Link to="/home">
+                <li>
+                  <button>HOME</button>
+                </li>
+              </Link>
+              <Link to="/">
+                <li>
+                  <button>LANDING</button>
+                </li>
+              </Link>
+            <Link to="/create">
+              <li>
+                <button>CREAR</button>
+              </li>
+            </Link>
+            </ul>
+          </nav>
+        </header>
       </div>
-    </nav>
+    </div>
   );
 };
 

@@ -1,16 +1,32 @@
 .background {
-  background-image: url(../../Media/360_F_378975954_G39M4ptXAjxKy80gbBIEo0wqBkk89gBF.jpg);
+  background-image: url(../../Media/real.jpg);
   background-size: cover;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   position: absolute;
   top: 0%;
   left: 0%;
   right: 0%;
   bottom: 0%;
+  font-family: "Shantell Sans", cursive;
 }
 
+.container {
+  height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+}
 .background a {
   text-decoration: none;
   color: inherit;

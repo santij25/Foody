@@ -11,6 +11,7 @@ import {
   getRecipeName,
 } from "../../redux/Actions";
 import Paginado from "../../Components/Paginado/Paginado";
+import style from "./Home.module.css"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <div>
         <nav>
           <div>

@@ -3,6 +3,7 @@ import { Route, useLocation } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import Loading from "./Components/Loading/Loading";
 // import NotFound from "./Components/NotFound/NotFound";
+import "./app.css"
 
 function App() {
   const location = useLocation();

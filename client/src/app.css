@@ -1,0 +1,10 @@
+.App {
+  background: url(./Media/real.jpg);
+  background-size: cover;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  scroll-behavior: auto;
+}

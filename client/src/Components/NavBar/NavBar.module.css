@@ -1,7 +1,89 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 15px;
-    border: 1px solid #000;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900;1000&display=swap');
+.todo {
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 0;
+  font-family: "Nunito", "sans-serif";
+  font-size: 20px;
 }
+
+.header {
+  background-color: rgb(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 85px;
+  padding: 5px 10%;
+  border-radius: 25px;
+}
+
+.header .logo {
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.header .logo span {
+  text-decoration: none;
+
+}
+
+.header .logo img {
+  height: 78px;
+  width: auto;
+  transition: all 0.3s;
+}
+
+.header .logo img:hover {
+  transform: scale(1.2);
+}
+
+.header .navLinks {
+  list-style: none;
+  display: flex;
+  align-items: fle;
+  justify-content: center;
+}
+
+.header .navLinks li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.header .navLinks li:hover {
+  transform: scale(1.1);
+}
+
+.header .navLinks button {
+  font-weight: 700;
+  color: #ffbc0e;
+  padding: 9px 25px;
+  background-color: #7f5539;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0;
+}
+
+.header .navLinks button:hover {
+  background-color: #ffbc0e;
+  color: #7f5539;
+  transform: scale(1.1);
+}
+
+.header .btn button {
+  font-weight: 700;
+  color: #ffbc0e;
+  padding: 9px 25px;
+  background-color: #7f5539;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0;
+}
+
+.header .btn button:hover { 
+  background-color: #ffbc0e;
+  color: #7f5539;
+  transform: scale(1.1);
+}
+
