@@ -1,10 +1,10 @@
 .App {
-  background: url(./Media/real.jpg);
+  background: url(./Media/back.avif);
   background-size: cover;
-  position: absolute;
+  /* background-attachment: fixed; */
   top: 0%;
   left: 0%;
   right: 0%;
   bottom: 0%;
-  scroll-behavior: auto;
+  z-index: -1;
 }

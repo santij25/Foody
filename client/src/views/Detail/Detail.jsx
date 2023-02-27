@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeId } from "../../redux/Actions";
+import style from "./Detail.module.css";
+
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -12,21 +14,27 @@ const Detail = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className={style.container}>
       <h6>name: {recipe.name}</h6>
       <img src={recipe.imagen} alt="receta" />
-      <h6>resumenDelPlato: {recipe.resumenDelPlato}</h6>
+      <h6 dangerouslySetInnerHTML={{__html: recipe.resumenDelPlato}}></h6>
       <h6>healthScore: {recipe.healthScore}</h6>
       <h6>diets:{recipe.diets}</h6>
       <ul>
         steps:
-        {(recipe.pasoAPaso)
-          ? (typeof recipe.pasoAPaso[0] === "object") ? recipe.pasoAPaso.map((r) => {
-              return <li>{r.number + " " + r.step}</li>
-            }) : recipe.pasoAPaso.map(r => {
-              return <li>{r}</li>
+        {recipe.pasoAPaso ? (
+          typeof recipe.pasoAPaso[0] === "object" ? (
+            recipe.pasoAPaso.map((r) => {
+              return <li>{r.number + " " + r.step}</li>;
             })
-          : <p>No hay pasos 😔</p>}
+          ) : (
+            recipe.pasoAPaso.map((r) => {
+              return <li>{r}</li>;
+            })
+          )
+        ) : (
+          <p>No hay pasos 😔</p>
+        )}
       </ul>
     </div>
   );

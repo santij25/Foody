@@ -5,13 +5,15 @@ const Card = (props) => {
   // console.log(props.id);
   return (
     <div className={style.card}>
-      <Link to={`/Detail/${props.id}`}>
-        <p>name: {props.name}</p>
+      <img src={props.imagen} alt="plato" className={style.img}/>
+      <Link to={`/Detail/${props.id}`} className={style.link}>
+        <h1>{props.name}</h1>
       </Link>
-      <img src={props.imagen} alt="plato" width={"250px"} height={"200px"}/>
       {/* <p>resumenDelPlato:{props.resumenDelPlato}</p> */}
-      <p> healthScore:{props.healthScore}</p>
-      {props.diets.map(d => <p>{d}</p>)}
+      {/* <div className={style.barprog}> <p>{props.healthScore}%</p></div> */}
+      <div className={style.diets}>
+      {props.diets.map(d => <span>☑{d}</span>)}
+      </div>
       {/* <p> pasoAPaso:{props.pasoAPaso}</p> */}
     </div>
   );
