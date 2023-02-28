@@ -1,34 +1,182 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }
 
 .formulario {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: blue;
-    width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  background-color: rgb(188, 108, 37, 0.5);
+  background-color: rgb(127, 85, 57, 0.5);
+  border-radius: 25px;
+}
+
+.formulario button {
+  margin: 10px;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffbc0e;
+  color: #7f5539;
+  font-weight: 700;
+}
+
+.formulario button:hover {
+  transform: scale(1.1);
 }
 
 .conter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.conter label {
+  color: #fefae0;
+  font-size: 20px;
+}
+
+.conter span {
+  color: red;
 }
 
 .input {
-    width: 250px;
-    height: 20px;
-    margin-top: 5px;
-    background-color: inherit;
-    border: none;
-    border-bottom: 1px solid red;
+  width: 250px;
+  height: 30px;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid #fefae0;
 }
 
-.input:active {
-    border: none;
+.input::placeholder {
+  color: black;
+}
+
+.diets {
+  color: #fefae0;
+  font-size: 20px;
+}
+
+.textArea {
+  background-color: inherit;
+  border: 1px solid #fefae0;
+}
+
+.textArea::placeholder {
+  color: black;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 1px solid #fefae0;
+  background: rgb(127, 85, 57, 0.2);
+  background-image: none;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fefae0;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.select::-ms-expand {
+  display: none;
+}
+
+.selected {
+  position: relative;
+  display: flex;
+  width: 250px;
+  height: 48px;
+  line-height: 3;
+  background: rgb(127, 85, 57, 0.2);
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+
+.selected::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: rgb(127, 85, 57, 0.2);
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease;
+  border: 1px solid #fefae0;
+}
+
+.selected:hover::after {
+  color: #fefae0;
+}
+
+.selected option {
+  color: #000;
+}
+
+.agregadas {
+  height: 560px;
+  width: 400px;
+  border-radius: 25px;
+  background-color: rgb(127, 85, 57, 0.2);
+  justify-content: flex-start;
+  text-align: center;
+  padding: 10px;
+}
+
+.agregadas label {
+  padding: 10px;
+  color: #fefae0;
+  font-size: 20px;
+}
+
+.sinLabel {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px 5px;
+}
+
+.list {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  background-color: #7f5539;
+  color: #ffbc0e;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+.list p {
+  padding: 5px;
+}
+
+.list button {
+  width: 25px;
+  height: 40px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border: none;
+  background-color: #ffbc0e;
+  color: #7f5539;
+}
+
+.list button:hover {
+  transform: scale(1.1);
 }

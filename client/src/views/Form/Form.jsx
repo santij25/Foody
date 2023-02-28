@@ -6,7 +6,7 @@ import { getDiets } from "../../redux/Actions";
 import { useHistory } from "react-router-dom";
 import { postRecipe } from "../../redux/Actions";
 import { Validations } from "./Validaciones";
-import style from "./Form.module.css"
+import style from "./Form.module.css";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -92,27 +92,29 @@ const Form = () => {
           />
           {errors.name && <span>{errors.name}</span>}
         </div>
-        <div>
+        <div className={style.conter}>
           <label>Resumen del plato: </label>
           <input
             type="text"
             name="resumenDelPlato"
             onChange={changeHandler}
             placeholder="Resumen del plato..."
+            className={style.input}
           />
           {errors.resumenDelPlato && <span>{errors.resumenDelPlato}</span>}
         </div>
-        <div>
+        <div className={style.conter}>
           <label>Nivel de comida saludable: </label>
           <input
             type="number"
             name="healthScore"
             onChange={changeHandler}
             placeholder="Nivel de saludable..."
+            className={style.input}
           />
           {errors.healthScore && <span>{errors.healthScore}</span>}
         </div>
-        <div>
+        <div className={style.conter}>
           <label>Pasos: </label>
           <textarea
             name="pasoAPaso"
@@ -123,43 +125,53 @@ const Form = () => {
             1 hervir el agua 
             2 sacar el agua 
             (Respetar el formato)"
+            className={style.textArea}
           />
         </div>
-        <div>
+        <div className={style.conter}>
           <label>Imagen: </label>
           <input
             type="text"
             name="imagen"
             onChange={changeHandler}
-            placeholder="Link de la imagen..."
+            placeholder="URL de la imagen..."
+            className={style.input}
           />
           {errors.imagen && <span>{errors.imagen}</span>}
         </div>
 
-        <div>
-        <label className="info">Diets: </label>
-        <select name="diets" className="diets" onChange={selectHandler}>
-          {!dietasApi.length ? (
-            <option>Cargando...</option>
-          ) : (
-            dietasApi.map((e) => {
-              return (
-                <option key={e.id} value={e.id}>
-                  {e.Nombre}
-                </option>
-              );
-            })
-          )}
-        </select>
+        <label className={style.diets}>Diets: </label>
+        <div className={style.selected}>
+          <select
+            name="diets"
+            className={style.select}
+            onChange={selectHandler}
+          >
+            {!dietasApi.length ? (
+              <option>Cargando...</option>
+            ) : (
+              dietasApi.map((e) => {
+                return (
+                  <option key={e.id} value={e.id}>
+                    {e.Nombre}
+                  </option>
+                );
+              })
+            )}
+          </select>
         </div>
-        <br />
-        <div>
-          <label>Dietas Agregadas: </label>
+        <button type="submit" onClick={SubmitHandler}>
+          CREAR RECETA
+        </button>
+      </form>
+      <div className={style.agregadas}>
+        <label>Dietas Agregadas: </label>
+        <div className={style.sinLabel}>
           {!form.diets
             ? null
             : form.diets.map((diet) => (
                 <div key={diet}>
-                  <div className="dietAdd">
+                  <div className={style.list}>
                     <p>{diet}</p>
                     <button
                       onClick={(a) => {
@@ -170,15 +182,11 @@ const Form = () => {
                       X
                     </button>
                   </div>
-                  <hr className="div" />
+                  {/* <hr className="div" /> */}
                 </div>
               ))}
         </div>
-
-        <button type="submit" onClick={SubmitHandler}>
-          CREAR RECETA
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
