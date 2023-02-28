@@ -2,8 +2,8 @@
     border: 1px solid #000;
     border-radius: 30px;
     width: 500px;
-    height: 600px;
-    background-color: rgb(127, 85, 57);
+    max-height: 600px;
+    background-color: rgb(66, 196, 66, .3);
     display: flex;
     flex-direction: column;
 }
@@ -14,14 +14,17 @@
 
 .link {
     text-decoration: none;
+    height: 8rem;
 }
 
 .link h1 {
-    font-size: 20px;
-    color: #fff;
+    font-size: 25px;
+    color: #04292e;
+    font-weight: 900;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .img {
@@ -31,9 +34,35 @@
     border-top-left-radius: 30px;
 }
 
-.diets {
-    background-color: #fff;
+.descripcion {
+    height: 16.8rem;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.diets{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    background-color: rgb(42, 140, 68, .4);
+    height: 11rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.diets span {
+    margin-right: 5px;
+    text-transform: capitalize;
+}
+
+.diets span img {
+    width: 1.4rem;
+    height: auto;
+    margin: 1px 5px;
 }
 
 
