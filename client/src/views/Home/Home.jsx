@@ -8,7 +8,6 @@ import {
   filterScore,
   filterDiets,
   filterDbApi,
-  // getRecipeName,
 } from "../../redux/Actions";
 import Paginado from "../../Components/Paginado/Paginado";
 import style from "./Home.module.css";
@@ -25,7 +24,7 @@ const Home = () => {
   const [current, setCurrent] = useState(1);
   const [postPerPage] = useState(9);
   const lastPostIndex = current * postPerPage;
-  const firstPostIndex = lastPostIndex - postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage; 
   let currentRecipes = recipes.slice(firstPostIndex, lastPostIndex);
 
   //* Filtros
@@ -52,9 +51,6 @@ const Home = () => {
     setName(e.target.value);
   };
 
-  // const handleSubmit = () => {
-  //   dispatch(getRecipeName(name));
-  // };
   currentRecipes = !name
     ? recipes.slice(firstPostIndex, lastPostIndex)
     : recipes.filter((e) =>
@@ -80,12 +76,6 @@ const Home = () => {
                   onChange={HandleChange}
                   placeholder="Buscar receta"
                   className={style.filtre}
-                />
-                <input
-                  type="submit"
-                  value="🔎"
-                  // onClick={handleSubmit}
-                  className={style.filtro}
                 />
               </div>
               <div className={style.selected}>

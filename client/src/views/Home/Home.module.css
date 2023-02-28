@@ -26,6 +26,10 @@
   color: #fefae0;
 }
 
+.filtre::placeholder {
+  color: #fefae0;
+}
+
 .filtro {
   background-color: rgb(127, 85, 57, 0.01);
   border: none;

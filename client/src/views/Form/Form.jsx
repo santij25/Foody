@@ -6,6 +6,7 @@ import { getDiets } from "../../redux/Actions";
 import { useHistory } from "react-router-dom";
 import { postRecipe } from "../../redux/Actions";
 import { Validations } from "./Validaciones";
+import style from "./Form.module.css"
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -78,15 +79,16 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <form>
-        <div>
+    <div className={style.container}>
+      <form className={style.formulario}>
+        <div className={style.conter}>
           <label>Nombre: </label>
           <input
             type="text"
             name="name"
             onChange={changeHandler}
             placeholder="Nombre..."
+            className={style.input}
           />
           {errors.name && <span>{errors.name}</span>}
         </div>
@@ -134,6 +136,7 @@ const Form = () => {
           {errors.imagen && <span>{errors.imagen}</span>}
         </div>
 
+        <div>
         <label className="info">Diets: </label>
         <select name="diets" className="diets" onChange={selectHandler}>
           {!dietasApi.length ? (
@@ -148,8 +151,9 @@ const Form = () => {
             })
           )}
         </select>
+        </div>
         <br />
-        <div className="DietasAgregadas">
+        <div>
           <label>Dietas Agregadas: </label>
           {!form.diets
             ? null

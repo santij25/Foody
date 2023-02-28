@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blue;
+    width: 600px;
+}
+
+.conter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.input {
+    width: 250px;
+    height: 20px;
+    margin-top: 5px;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid red;
+}
+
+.input:active {
+    border: none;
+}
