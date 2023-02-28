@@ -8,18 +8,13 @@ import {
   filterScore,
   filterDiets,
   filterDbApi,
-  getRecipeName,
+  // getRecipeName,
 } from "../../redux/Actions";
 import Paginado from "../../Components/Paginado/Paginado";
-import style from "./Home.module.css"
+import style from "./Home.module.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getRecipes());
-    dispatch(getDiets());
-  }, [dispatch]);
 
   const recipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
@@ -31,7 +26,7 @@ const Home = () => {
   const [postPerPage] = useState(9);
   const lastPostIndex = current * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
-  const currentRecipes = recipes.slice(firstPostIndex, lastPostIndex);
+  let currentRecipes = recipes.slice(firstPostIndex, lastPostIndex);
 
   //* Filtros
 
@@ -57,69 +52,112 @@ const Home = () => {
     setName(e.target.value);
   };
 
-  const handleSubmit = () => {
-    dispatch(getRecipeName(name));
-  };
+  // const handleSubmit = () => {
+  //   dispatch(getRecipeName(name));
+  // };
+  currentRecipes = !name
+    ? recipes.slice(firstPostIndex, lastPostIndex)
+    : recipes.filter((e) =>
+        e.name.toLowerCase().includes(name.toLocaleLowerCase())
+      );
+
+  useEffect(() => {
+    dispatch(getRecipes());
+    dispatch(getDiets());
+  }, [dispatch]);
 
   return (
     <div className={style.container}>
-      <div>
+      <div className={style.contenedor}>
         <nav>
           <div>
-            <form>
-              <input
-                type="text"
-                name="Buscar"
-                onChange={HandleChange}
-                placeholder="Bucsar receta"
-              />
-              <input type="submit" value="🔎" onClick={handleSubmit} />
+            <form className={style.formulario}>
+              <div className={style.buscador}>
+                <input
+                  value={name}
+                  type="text"
+                  name="Buscar"
+                  onChange={HandleChange}
+                  placeholder="Buscar receta"
+                  className={style.filtre}
+                />
+                <input
+                  type="submit"
+                  value="🔎"
+                  // onClick={handleSubmit}
+                  className={style.filtro}
+                />
+              </div>
+              <div className={style.selected}>
+                <select
+                  onChange={nameHandler}
+                  defaultValue="default"
+                  className={style.select}
+                >
+                  <option value="default" disabled>
+                    Ordenar por Nombre
+                  </option>
+                  <option value="A-Z">A-Z</option>
+                  <option value="Z-A">Z-A</option>
+                </select>
+              </div>
 
-              <select onChange={nameHandler} defaultValue="default">
-                <option value="default" disabled>
-                  Ordenar por Nombre
-                </option>
-                <option value="A-Z">A-Z</option>
-                <option value="Z-A">Z-A</option>
-              </select>
+              <div className={style.selected}>
+                <select
+                  defaultValue="default"
+                  onChange={scoreHandler}
+                  className={style.select}
+                >
+                  <option value="default" disabled>
+                    Ordenar por puntaje
+                  </option>
+                  <option value="MIN">Min - Max</option>
+                  <option value="MAX">Max - Min</option>
+                </select>
+              </div>
 
-              <select defaultValue="default" onChange={scoreHandler}>
-                <option value="default" disabled>
-                  Ordenar por puntaje
-                </option>
-                <option value="MIN">Min - Max</option>
-                <option value="MAX">Max - Min</option>
-              </select>
+              <div className={style.selected}>
+                <select
+                  defaultValue="default"
+                  onChange={dietsHandler}
+                  className={style.select}
+                >
+                  <option value="default" disabled>
+                    Tipo de Dieta
+                  </option>
+                  <option value="All">All</option>
+                  {diets.map((e) => {
+                    return (
+                      <option value={e.Nombre} key={e.id}>
+                        {e.Nombre}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
 
-              <select defaultValue="default" onChange={dietsHandler}>
-                <option value="default" disabled>
-                  Tipo de Dieta
-                </option>
-                <option value="All">All</option>
-                {diets.map((e) => {
-                  return (
-                    <option value={e.Nombre} key={e.id}>
-                      {e.Nombre}
-                    </option>
-                  );
-                })}
-              </select>
-
-              <select name="DBAPI" onChange={dbApiHandler}>
-                <option value="ALL">All</option>
-                <option value="DB">DataBase</option>
-                <option value="API">API</option>
-              </select>
+              <div className={style.selected}>
+                <select
+                  name="DBAPI"
+                  onChange={dbApiHandler}
+                  className={style.select}
+                >
+                  <option value="ALL">Todas</option>
+                  <option value="DB">Creadas</option>
+                  <option value="API">No creadas</option>
+                </select>
+              </div>
             </form>
           </div>
         </nav>
       </div>
-      <CardsContainer recipes={currentRecipes} />
       <Paginado
         totalRecipes={recipes.length}
         postPerPage={postPerPage}
         setCurrent={setCurrent}
+        current={current}
       />
+      <CardsContainer recipes={currentRecipes} />
     </div>
   );
 };
