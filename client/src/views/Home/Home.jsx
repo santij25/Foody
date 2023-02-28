@@ -8,6 +8,7 @@ import {
   filterScore,
   filterDiets,
   filterDbApi,
+  getRecipeName,
 } from "../../redux/Actions";
 import Paginado from "../../Components/Paginado/Paginado";
 import style from "./Home.module.css";
@@ -18,6 +19,11 @@ const Home = () => {
   const recipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
   console.log(recipes);
+
+  useEffect(() => {
+    dispatch(getRecipes());
+    dispatch(getDiets());
+  }, [dispatch]);
 
   //* Paginado
 
@@ -65,16 +71,16 @@ const Home = () => {
     setName(e.target.value);
   };
 
-  currentRecipes = !name
-    ? recipes.slice(firstPostIndex, lastPostIndex)
-    : recipes.filter((e) =>
-        e.name.toLowerCase().includes(name.toLocaleLowerCase())
-      );
+  // currentRecipes = !name
+  //   ? recipes.slice(firstPostIndex, lastPostIndex)
+  //   : recipes.filter((e) =>
+  //       e.name.toLowerCase().includes(name.toLocaleLowerCase())
+  //     );
 
-  useEffect(() => {
-    dispatch(getRecipes());
-    dispatch(getDiets());
-  }, [dispatch]);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(getRecipeName(name));
+  };
 
   return (
     <div className={style.container}>
@@ -90,6 +96,12 @@ const Home = () => {
                   onChange={HandleChange}
                   placeholder="Buscar receta"
                   className={style.filtre}
+                />
+                <input
+                  type="submit"
+                  className={style.filtro}
+                  value="🔍"
+                  onClick={(e) => submitHandler(e)}
                 />
               </div>
               <div className={style.selected}>

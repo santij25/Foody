@@ -36,6 +36,7 @@
   border-radius: 7px;
   min-height: 48px;
   width: 42px;
+  cursor: pointer;
 }
 
 .select {
