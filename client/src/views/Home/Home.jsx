@@ -24,8 +24,22 @@ const Home = () => {
   const [current, setCurrent] = useState(1);
   const [postPerPage] = useState(9);
   const lastPostIndex = current * postPerPage;
-  const firstPostIndex = lastPostIndex - postPerPage; 
+  const firstPostIndex = lastPostIndex - postPerPage;
   let currentRecipes = recipes.slice(firstPostIndex, lastPostIndex);
+
+  const nextHandler = () => {
+    const total = recipes.length;
+    const next = current + 1;
+    const index1 = current * postPerPage;
+    if (index1 >= total) return;
+    setCurrent(next);
+  };
+
+  const prevHandler = () => {
+    const prev = current - 1;
+    if (prev < 1) return;
+    setCurrent(prev);
+  };
 
   //* Filtros
 
@@ -146,6 +160,8 @@ const Home = () => {
         postPerPage={postPerPage}
         setCurrent={setCurrent}
         current={current}
+        nextHandler={nextHandler}
+        prevHandler={prevHandler}
       />
       <CardsContainer recipes={currentRecipes} />
     </div>
