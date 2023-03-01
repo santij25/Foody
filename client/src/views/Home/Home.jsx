@@ -71,12 +71,6 @@ const Home = () => {
     setName(e.target.value);
   };
 
-  // currentRecipes = !name
-  //   ? recipes.slice(firstPostIndex, lastPostIndex)
-  //   : recipes.filter((e) =>
-  //       e.name.toLowerCase().includes(name.toLocaleLowerCase())
-  //     );
-
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(getRecipeName(name));
